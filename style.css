@@ -1,0 +1,64 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.container{
+    margin-bottom: 70px;
+}
+.bg-pink{
+    border-radius: 10px;
+    background-color: #FEEAE9;
+}
+.bg-pink p{
+    color: gray;
+}
+.carousel-item{
+    padding: 20px 40px;
+}
+
+.buy-now-button{
+    padding: 10px 20px;
+    color: #ffffff;
+    background-image: linear-gradient(180deg, #ff589b, #ff136f);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.buy-now-button:hover{
+    background-image: linear-gradient(180deg, #ff0062, #ff0062);
+    box-shadow: 2px 2px 5px gray;
+}
+.price{
+    color: #FF136F;
+}
+.categories a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.categories img{
+    width: 100px;
+}
+.cat1, .cat2, .cat3{
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.cat1{
+    background-image: linear-gradient(90deg, tomato, orange);
+}
+.cat2{
+    background-image: linear-gradient(90deg, blue, cyan);
+}
+.cat3{
+    background-image: linear-gradient(90deg, hotpink, pink);
+}
+.card{
+    border: none;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px lightgray;
+}
+.card-footer{
+    border: none;
+}
+.subscribe{
+    height: 300px;
+    
+}
