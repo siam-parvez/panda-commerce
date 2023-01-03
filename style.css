@@ -62,3 +62,51 @@
     height: 300px;
     
 }
+
+.title {
+    color: #ff589b;
+}
+
+.table-custom {
+    background-color: #ff589b45;
+}
+
+.action-btn {
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.action-btn:hover {
+    transition: background-color 0.2s ease-in-out;
+}
+
+
+.view-btn {
+    background-color: #58bfffb5;
+}
+
+.view-btn:hover {
+    background-color: #58bfff;
+}
+
+.edit-btn {
+    background-color: #58ff58b5;
+}
+
+.edit-btn:hover {
+    background-color: #58ff58;
+}
+
+
+.delete-btn {
+    background-color: #ff6358b5;
+}
+
+.delete-btn:hover {
+    background-color: #ff6358;
+}
