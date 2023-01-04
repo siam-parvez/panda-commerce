@@ -46,7 +46,7 @@
                   <li class="nav-item mx-3">
                     <a class="nav-link" href="/index.html#watches">Watches</a>
                   </li>
-                  <li class="nav-item ms-3">
+                  <li class="nav-item mx-3">
                     <a class="nav-link" href="#subscribe">Subscribe</a>
                   </li>
                   <li class="nav-item mx-3">

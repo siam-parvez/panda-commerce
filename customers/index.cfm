@@ -15,7 +15,9 @@
     <!--- deleting a customer  --->
     <cfinclude template="act_customers_delete.cfm">
     <!--- after deleting the record we are running the ViewCustomers fuseaction again to see the updated list of customers --->
-    <cflocation url="index.cfm?fuseaction=ViewCustomers&showCustomers=all" />
+    <script>
+         document.location.replace('/customers/index.cfm?fuseaction=ViewCustomers&showCustomers=all')
+    </script>
 
 <cfelseif isDefined("fuseaction") AND fuseaction EQ "EditCustomer">
     <!--- to edit a single customers record we are collecting the info by their id in the qry --->
@@ -28,6 +30,13 @@
     <cfinclude template="act_customers_save.cfm">
     <!--- after updating or adding the record we will display that single new or updated record --->
     <cflocation url="index.cfm?fuseaction=ViewCustomers&showCustomers=single&CustomerID=#CustomerID#" />
+
+     <!--- TODO: uncomment the codes after adding the queries and getting the variable from above --->
+    <!--- <cfoutput>
+        <script>
+            document.location.replace('/customers/index.cfm?fuseaction=ViewCustomers&showCustomers=single&CustomerID=#CustomerID#')
+       </script>
+    </cfoutput> --->
 </cfif>
 
 <cfinclude template="/common/dsp_footer.cfm" >

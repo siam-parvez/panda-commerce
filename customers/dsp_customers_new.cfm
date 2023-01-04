@@ -2,50 +2,113 @@
     <div class="border border-secondary text-center rounded p-3">
         <h1 class="title mb-0 fw-bold">Add New Customer</h1>
     </div>
-    <div class="table-responsive rounded mt-4">
-        <table class="table border">
-            <thead class="table-custom">
-                <tr>
-                    <th>Title</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead> 
-            <tbody>
-                <tr>
-                    <td>#FisrtName# #LastName#</td>
-                    <td>#PhoneNumber#</td>
-                    <td>#EmailAddress#</td>
-                    <td>#City#, #State#</td>
-                    <td class="flex">
-                        <form action="index.cfm" method="POST" name="ViewCustomerForm" class="d-inline">
-                            <input type="hidden" name="fuseaction" value="ViewCustomers">
-                            <input type="hidden" name="CustomerID" value="#CustomerID#">
-                            <input type="hidden" name="showCustomers" value="single">
-                            <input type="submit" class="d-none" id="viewCustomerSubmit">
-                            <label class="action-btn view-btn" for="viewCustomerSubmit">
-                                <svg class="inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                </svg>
-                            </label>
-                        </form>
+    <form action="index.cfm" method="POST" name="AddNewCustomerForm">
+        <div class="table-responsive rounded mt-4">
+            <table class="table table-bordered">
+                <thead class="table-custom">
+                    <tr>
+                        <th>Title</th>
+                        <th nowrap>First Name*</th>
+                        <th nowrap>Middle Name</th>
+                        <th nowrap>Last Name*</th>
+                        <th>Suffix</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr>
+                        <td>
+                            <select name="Title" class="form-select">
+                                <option value="" selected>Select</option>
+                                <option value="Mr.">Mr.</option>
+                                <option value="Ms.">Ms.</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="FirstName" class="form-control" placeholder="First Name" required>
+                        </td>
+                        <td>
+                            <input type="text" name="MiddleName" class="form-control" placeholder="Middle Name">
+                        </td>
+                        <td>
+                            <input type="text" name="LastName" class="form-control" placeholder="Last Name" required>
+                        </td>
+                        <td>
+                            <input type="text" name="Suffix" class="form-control" placeholder="Suffix">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive rounded mt-4">
+            <table class="table table-bordered">
+                <thead class="table-custom">
+                    <tr>
+                        <th colspan="2">Phone*</th>
+                        <th>Email*</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr>
+                        <td>
+                            <select name="TelephoneNumberType" class="form-select" required>
+                                <option value="" selected>Select</option>
+                                <!--- <cfoutput query="getTelephoneNumberTypes">
+                                    <option value="#PhoneNumberTypeID#" selected>#Name#</option>
+                                </cfoutput> --->
+                            </select>
+                        </td>
+                        <td>
+                            <input type="tel" name="Telephone" class="form-control" placeholder="Telephone" required>
+                        </td>
+                        <td>
+                            <input type="email" name="Email" class="form-control" placeholder="Email" required>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-                        <form action="index.cfm" method="POST" name="EditCustomerForm" class="d-inline">
-                            <input type="hidden" name="fuseaction" value="EditCustomer">
-                            <input type="hidden" name="CustomerID" value="#CustomerID#">
-                            <input type="submit" class="d-none" id="editCustomerSubmit">
-                            <label class="action-btn edit-btn" for="editCustomerSubmit">
-                                <svg class="inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                </svg>
-                            </label>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="table-responsive rounded mt-4">
+            <table class="table table-bordered">
+                <thead class="table-custom">
+                    <tr>
+                        <th>Address Line 1*</th>
+                        <th>Address Line 2</th>
+                        <th>City*</th>
+                        <th>State*</th>
+                        <th>Postal Code*</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="address" name="AddressLine1" class="form-control" placeholder="Address Line 1" required>
+                        </td>
+                        <td>
+                            <input type="address" name="AddressLine2" class="form-control" placeholder="Address Line 2">
+                        </td>
+                        <td>
+                            <!--- we can do a query to get all the cities available in the database and can show them in a dropdown --->
+                            <input type="text" name="City" class="form-control" placeholder="City" required>
+                        </td>
+                        <td>
+                            <!--- we can do a query to get all the states available in the database and can show them in a dropdown --->
+                            <input type="text" name="State" class="form-control" placeholder="State" required>
+                        </td>
+                        <td>
+                            <input type="text" name="PostalCode" class="form-control" placeholder="Postal Code" required>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <cfoutput>
+                    <input type="hidden" name="previousFuseaction" value="#fuseaction#">
+                </cfoutput>
+                <input type="hidden" name="fuseaction" value="SaveCustomer">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="/customers/index.cfm?fuseaction=ViewCustomers&showCustomers=all" class="btn btn-secondary ms-2">Go Back</a>
+            </div>
+        </div>
+    </form>
 </div>
