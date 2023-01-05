@@ -52,16 +52,16 @@
                         <td>
                             <select name="TelephoneNumberType" class="form-select" required>
                                 <option value="" selected>Select</option>
-                                <!--- <cfoutput query="getTelephoneNumberTypes">
-                                    <option value="#PhoneNumberTypeID#" selected>#Name#</option>
-                                </cfoutput> --->
+                                <cfoutput query="getPhoneNumberTypes">
+                                    <option value="#PhoneNumberTypeID#">#Name#</option>
+                                </cfoutput>
                             </select>
                         </td>
                         <td>
-                            <input type="tel" name="Telephone" class="form-control" placeholder="Telephone" required>
+                            <input type="tel" name="PhoneNumber" class="form-control" placeholder="Phone Number" required>
                         </td>
                         <td>
-                            <input type="email" name="Email" class="form-control" placeholder="Email" required>
+                            <input type="email" name="EmailAddress" class="form-control" placeholder="Email Address" required>
                         </td>
                     </tr>
                 </tbody>
@@ -93,7 +93,7 @@
                         </td>
                         <td>
                             <!--- we can do a query to get all the states available in the database and can show them in a dropdown --->
-                            <input type="text" name="State" class="form-control" placeholder="State" required>
+                            <input type="text" name="StateCode" class="form-control" placeholder="State" required>
                         </td>
                         <td>
                             <input type="text" name="PostalCode" class="form-control" placeholder="Postal Code" required>

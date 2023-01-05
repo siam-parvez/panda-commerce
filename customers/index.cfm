@@ -1,3 +1,5 @@
+<cfset main_dsn = "AdventureWorks">
+
 <cfinclude template="/common/dsp_header.cfm" >
 <cfif isDefined("fuseaction") AND fuseaction EQ "ViewCustomers">
     <!--- we are running the qry file to get customers records --->
@@ -37,6 +39,10 @@
             document.location.replace('/customers/index.cfm?fuseaction=ViewCustomers&showCustomers=single&CustomerID=#CustomerID#')
        </script>
     </cfoutput> --->
+<cfelseif isDefined("fuseaction") AND fuseaction EQ "FilterCustomers">
+    <!--- display customers according Alphabetical order and country --->
+    <cfinclude template="qry_customers.cfm">
+    <cfinclude template="dsp_customers_view.cfm">
 </cfif>
 
 <cfinclude template="/common/dsp_footer.cfm" >

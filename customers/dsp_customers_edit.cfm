@@ -1,5 +1,4 @@
- <!--- TODO: uncomment the line below after adding the queries --->
-<!--- <cfoutput query="getSingleCustomersRecord"> --->
+<cfoutput query="getSingleCustomersRecord">
     <div class="container">
         <div class="border border-secondary text-center rounded p-3">
             <h1 class="title mb-0 fw-bold">Edit Customer No. #CustomerID#</h1>
@@ -52,18 +51,17 @@
                     <tbody>
                         <tr>
                             <td>
-                                <select name="TelephoneNumberType" class="form-select" required>
-                                    <option value="">Select</option>
-                                    <!--- <cfoutput query="getTelephoneNumberTypes">
-                                        <option value="#PhoneNumberTypeID#" <cfif isDefined("TelephoneNumberTypeID") AND TelephoneNumberTypeID EQ #PhoneNumberTypeID#>select</cfif>>#Name#</option>
-                                    </cfoutput> --->
+                                <select name="PhoneNumbertype" class="form-select" required>
+                                    <cfloop from="1" to="#getPhoneNumberTypes.recordcount#" index="i">
+                                        <option value="#getPhoneNumberTypes.PhoneNumberTypeID[i]#" <cfif thisPhoneNumberTypeID EQ #getPhoneNumberTypes.PhoneNumberTypeID[i]#>selected</cfif>>#getPhoneNumberTypes.Name[i]#</option>
+                                    </cfloop>
                                 </select>
                             </td>
                             <td>
-                                <input type="tel" name="Telephone" class="form-control" <cfif isDefined("Telephone") AND Telephone NEQ "">value="#Telephone#"</cfif> placeholder="Telephone" required>
+                                <input type="tel" name="PhoneNumber" class="form-control" <cfif isDefined("PhoneNumber") AND PhoneNumber NEQ "">value="#PhoneNumber#"</cfif> placeholder="Phone Number" required>
                             </td>
                             <td>
-                                <input type="email" name="Email" class="form-control" <cfif isDefined("Email") AND Email NEQ "">value="#Email#"</cfif> placeholder="Email" required>
+                                <input type="email" name="EmailAddress" class="form-control" <cfif isDefined("EmailAddress") AND EmailAddress NEQ "">value="#EmailAddress#"</cfif> placeholder="Email Address" required>
                             </td>
                         </tr>
                     </tbody>
@@ -95,7 +93,7 @@
                             </td>
                             <td>
                                 <!--- we can do a query to get all the states available in the database and can show them in a dropdown --->
-                                <input type="text" name="State" class="form-control" <cfif isDefined("State") AND State NEQ "">value="#State#"</cfif> placeholder="State" required>
+                                <input type="text" name="StateCode" class="form-control" <cfif isDefined("StateCode") AND StateCode NEQ "">value="#StateCode#"</cfif> placeholder="State" required>
                             </td>
                             <td>
                                 <input type="text" name="PostalCode" class="form-control" <cfif isDefined("PostalCode") AND PostalCode NEQ "">value="#PostalCode#"</cfif> placeholder="Postal Code" required>
@@ -115,4 +113,4 @@
             </div>
         </form>
     </div>
-<!--- </cfoutput> --->
+</cfoutput>
