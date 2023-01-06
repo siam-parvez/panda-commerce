@@ -15,41 +15,16 @@
     </div>
     <cfif isDefined("showCustomers") AND showCustomers EQ "all">
         <div>
-            <form action="index.cfm" method="POST" name="FilterCustomersForm" class="row mx-0 mb-4">
+            <form action="index.cfm" method="POST" name="FilterCustomersForm" class="row mx-0 mb-4 gap-3">
+                <h4 class="p-0 fw-bold w-auto my-auto">Filter:</h4>
                 <input type="hidden" name="showCustomers" value="all">
                 <input type="hidden" name="fuseaction" value="FilterCustomers">
-                <select class="form-select w-auto" name="SelectedLetter">
-                    <option value="All" <cfif NOT isDefined("NameAlphabet")>selected </cfif>>A-Z</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                    <option value="H">H</option>
-                    <option value="I">I</option>
-                    <option value="J">J</option>
-                    <option value="K">K</option>
-                    <option value="L">L</option>
-                    <option value="M">M</option>
-                    <option value="N">N</option>
-                    <option value="O">O</option>
-                    <option value="P">P</option>
-                    <option value="Q">Q</option>
-                    <option value="R">R</option>
-                    <option value="S">S</option>
-                    <option value="T">T</option>
-                    <option value="U">U</option>
-                    <option value="V">V</option>
-                    <option value="W">W</option>
-                    <option value="X">X</option>
-                    <option value="Y">Y</option>
-                    <option value="Z">Z</option>
-                </select>
-                <select class="form-select w-auto mx-2" name="SelectedCountry">
+                <cfoutput>
+                    <input class="form-control w-auto" size="1" name="SelectedLetter" placeholder="A-Z" maxlength="1" title="First character of the Customers last name (A-Z)" pattern="[A-Za-z]{1}" <cfif isDefined("SelectedLetter") AND SelectedLetter NEQ "">value="#SelectedLetter#"<cfelse>value="A"</cfif> style="text-transform:uppercase" required>
+                </cfoutput>
+                <select class="form-select w-auto" name="SelectedCountry">
                     <cfoutput query="getAllCountryCodes">
-                        <option <cfif NOT isDefined("SelectedCountry") AND CountryCode EQ "US">selected</cfif> value="#CountryCode#">#CountryName#</option>
+                        <option <cfif ( NOT isDefined("SelectedCountry") AND CountryCode EQ "US" ) OR ( isDefined("SelectedCountry") AND SelectedCountry EQ CountryCode) >selected</cfif> value="#CountryCode#">#CountryName#</option>
                     </cfoutput>
                 </select>
                 <button type="submit" class="btn btn-primary w-auto">Go</button>
@@ -59,7 +34,8 @@
             <table class="table border">
                 <thead class="table-custom">
                     <tr>
-                        <th>Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Address</th>
@@ -70,7 +46,10 @@
                     <cfoutput query="getAllCustomersRecords">
                         <tr>
                             <td>
-                                #FirstName# #LastName#
+                                #FirstName#
+                            </td>
+                            <td>
+                                #LastName#
                             </td>
                             <td>
                                 #PhoneNumber#
@@ -82,7 +61,7 @@
                                 #City#, #StateCode#
                             </td>
                             <td class="flex">
-                                <form action="index.cfm" method="POST" name="ViewCustomerForm_#CustomerID#" class="d-inline">
+                                <form action="index.cfm" method="POST" name="ViewCustomerForm_#CustomerID#" class="d-inline" title="See More">
                                     <input type="hidden" name="fuseaction" value="ViewCustomers">
                                     <input type="hidden" name="CustomerID" value="#CustomerID#">
                                     <input type="hidden" name="showCustomers" value="single">
@@ -95,7 +74,7 @@
                                     </label>
                                 </form>
 
-                                <form action="index.cfm" method="POST" name="EditCustomerForm_#CustomerID#" class="d-inline">
+                                <form action="index.cfm" method="POST" name="EditCustomerForm_#CustomerID#" class="d-inline" title="Edit Customer">
                                     <input type="hidden" name="fuseaction" value="EditCustomer">
                                     <input type="hidden" name="CustomerID" value="#CustomerID#">
                                     <input type="submit" class="d-none" id="editCustomerSubmit_#CustomerID#">
@@ -152,7 +131,7 @@
     <cfelse>
         <cfoutput query="getSingleCustomersRecord">
             <div class="flex text-end">
-                <form action="index.cfm" method="POST" name="EditCustomerForm_#CustomerID#" class="d-inline">
+                <form action="index.cfm" method="POST" name="EditCustomerForm_#CustomerID#" class="d-inline" title="Edit Customer">
                     <input type="hidden" name="fuseaction" value="EditCustomer">
                     <input type="hidden" name="CustomerID" value="#CustomerID#">
                     <input type="submit" class="d-none" id="editCustomerSubmit_#CustomerID#">

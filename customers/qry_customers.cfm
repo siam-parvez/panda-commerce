@@ -14,9 +14,8 @@
             RIGHT JOIN Person.BusinessEntityAddress bea ON p.BusinessEntityID = bea.BusinessEntityID
             RIGHT JOIN Person.Address pa ON bea.AddressID = pa.AddressID
             RIGHT JOIN Person.StateProvince sp ON pa.StateProvinceID = sp.StateProvinceID
-            -- Where (p.BusinessEntityID IS NOT NULL AND PersonType = 'IN')
-            -- Where (p.BusinessEntityID IS NOT NULL AND PersonType = 'IN' AND CountryRegionCode = 'US' )
-            WHERE (p.BusinessEntityID IS NOT NULL AND PersonType = 'IN' AND CountryRegionCode = 'US' AND StateProvinceCode IN ('GA' ) )
+            WHERE (p.BusinessEntityID IS NOT NULL AND PersonType = 'IN' AND CountryRegionCode = 'US')
+            AND LastName LIKE 'A%'
             ORDER BY LastName ASC
         </cfquery>
         <cfquery name="getAllCountryCodes" datasource="#main_dsn#">
@@ -72,4 +71,28 @@
         SELECT * FROM Person.PhoneNumberType
     </cfquery>
 <cfelseif isDefined("fuseaction") AND fuseaction EQ "FilterCustomers">
+    <!--- getting the filtered customers from here --->
+    <cfquery name="getAllCustomersRecords" datasource="#main_dsn#">
+        SELECT p.BusinessEntityID AS CustomerID, 
+            Title, FirstName, LastName, MiddleName, Suffix, 
+            AddressLine1, AddressLine2, City, PersonType,
+            StateProvinceCode AS StateCode, PostalCode, 
+            CountryRegionCode AS CountryCode,
+            EmailAddress, PhoneNumber
+        FROM Person.Person p
+        RIGHT JOIN Person.EmailAddress pe ON p.BusinessEntityID =  pe.BusinessEntityID
+        RIGHT JOIN Person.PersonPhone pp ON p.BusinessEntityID =  pp.BusinessEntityID 
+        RIGHT JOIN Person.BusinessEntityAddress bea ON p.BusinessEntityID = bea.BusinessEntityID
+        RIGHT JOIN Person.Address pa ON bea.AddressID = pa.AddressID
+        RIGHT JOIN Person.StateProvince sp ON pa.StateProvinceID = sp.StateProvinceID
+        WHERE (p.BusinessEntityID IS NOT NULL AND PersonType = 'IN' AND CountryRegionCode = '#SelectedCountry#')
+        <cfif isDefined("SelectedLetter") AND SelectedLetter NEQ "">
+            AND LastName LIKE '#SelectedLetter#%'
+        </cfif>
+        ORDER BY LastName ASC
+    </cfquery>
+     <cfquery name="getAllCountryCodes" datasource="#main_dsn#">
+        SELECT CountryRegionCode AS CountryCode, Name AS CountryName, ModifiedDate AS CountryLastCHange
+        FROM Person.CountryRegion
+    </cfquery>
 </cfif>
